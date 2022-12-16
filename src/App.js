@@ -15,6 +15,8 @@ import Albums from "./pages/Albums";
 
 import {isExpired} from "react-jwt";
 import * as PropTypes from "prop-types";
+import ArtistDetails from "./pages/ArtistDetails";
+import AlbumDetails from "./pages/AlbumDetails";
 
 
 function Redirect(props) {
@@ -37,7 +39,8 @@ function App() {
                     <Route  path='/albums' element={<Albums/>}/>
                     <Route  path='/' element={<Home/>}/>
                     <Route  path='/signin' element={!isNotLogged ? <Navigate to='/'/> : <Signin/>} />
-                    <Route  path='/movies/:id' element={<Details/>}/>
+                    <Route  path='/artists/:id' element={<ArtistDetails/>}/>
+                    <Route  path='/albums/:id' element={<AlbumDetails/>}/>
                     <Route  path='/signup' element={!isNotLogged ? <Navigate to='/'/> : <Signup/>} />
                     <Route  path='/add' element={isNotLogged ? <Navigate to='/signin'/> : <Add/>} />
                 </Routes>

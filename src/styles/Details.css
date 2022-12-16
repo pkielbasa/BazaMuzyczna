@@ -1,13 +1,20 @@
-.detail-container {
+
+.details {
     margin-top: 40px;
     padding: 10px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    color:rgba(255, 255, 255, 0.6);
 }
+
+.trackdetails {
+    margin-top: 40px;
+    padding: 10px;
+    flex-direction: row;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
 
 .poster img {
     height: 175px;
@@ -38,7 +45,7 @@
 
 .label-p{
     display:inline-block;
-    color:rgba(255, 255, 255, 0.6);
+   color:black;
     font-size: 20px;
 }
 
@@ -49,4 +56,15 @@
     font-family: Montserrat, serif;
     font-weight: 900;
 }
+.albums {
+    background-color:white;
+    float:left;
 
+}
+
+.tracklist {
+    display: grid;
+    grid-template-columns: 48px repeat(2,1fr);
+    align-items: center;
+    padding: 12px 0;
+}
