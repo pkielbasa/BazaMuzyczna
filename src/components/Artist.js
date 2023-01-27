@@ -1,10 +1,10 @@
 import React from 'react';
 
-import '../styles/Album.css';
+import '../styles/Artist.css';
 
-const Album = ({image, title}) => {
+const Artist = ({image, title}) => {
     return (
-        <div className='album'>
+        <div className='artist'>
             <img src={image} alt={title}/>
             <div className='info'>
                 <span className='title'>{title}</span>
@@ -14,4 +14,4 @@ const Album = ({image, title}) => {
     );
 };
 
-export default Album;
+export default Artist;

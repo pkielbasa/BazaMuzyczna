@@ -4,7 +4,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    color:white;
   }
 
   .Form form {
@@ -13,18 +12,8 @@
 
   }
 label{
-  color:white;
 }
-h1{
-  color:white;
-}
-button{
-  margin-top: 10px;
-  display: inline-block;
-  padding: 15px 25px;
-  font-size: 24px;
-  transition: all ease-in-out 0.3s;
-  background-color: #0b9cd9;
-}
+
+
 
 }

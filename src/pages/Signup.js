@@ -26,7 +26,7 @@ const Signup = () => {
         event.preventDefault();
         axios({
             method: 'post',
-            url: 'https://pr-movies.herokuapp.com/api/user/create',
+            url: 'http://localhost:3000/api/user/create',
             data: {
                 email: email,
                 name: name,

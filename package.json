@@ -18,6 +18,7 @@
     "react-dom": "^17.0.2",
     "react-h5-audio-player": "^3.8.6",
     "react-jwt": "^1.1.4",
+    "react-modern-audio-player": "^1.4.0-rc.0",
     "react-scripts": "^5.0.1",
     "web-vitals": "^0.2.4"
   },
@@ -48,6 +49,7 @@
   "devDependencies": {
     "aws-amplify": "^4.3.8",
     "jsonwebtoken": "^8.5.1",
+    "prop-types": "^15.8.1",
     "react-router-dom": "^6.2.1"
   }
 }

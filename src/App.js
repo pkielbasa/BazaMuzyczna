@@ -1,18 +1,17 @@
 import React from 'react';
 
-import {BrowserRouter as Router, Routes, Route, Navigate} from "react-router-dom";
+import {BrowserRouter as Router, Routes, Route, Navigate, BrowserRouter} from "react-router-dom";
 
 
 import './App.css';
 import Layout from './components/Layout';
 import Home from "./pages/Home";
 import Signin from "./pages/Signin";
-import Details from "./pages/Details";
 import Signup from "./pages/Signup";
 import Add from "./pages/Add";
 import Artists from "./pages/Artists";
 import Albums from "./pages/Albums";
-
+import Songs from "./pages/Songs";
 import {isExpired} from "react-jwt";
 import * as PropTypes from "prop-types";
 import ArtistDetails from "./pages/ArtistDetails";
@@ -32,20 +31,21 @@ function App() {
     const isNotLogged = isExpired(localStorage.getItem('token'));
 
     return (
-        <Router>
+        <BrowserRouter>
             <Layout>
                 <Routes>
                     <Route  path='/artists' element={<Artists/>}/>
                     <Route  path='/albums' element={<Albums/>}/>
+                    <Route  path='/songs' element={isNotLogged ? <Navigate to='/signin'/> : <Songs/>} />
                     <Route  path='/' element={<Home/>}/>
                     <Route  path='/signin' element={!isNotLogged ? <Navigate to='/'/> : <Signin/>} />
-                    <Route  path='/artists/:id' element={<ArtistDetails/>}/>
-                    <Route  path='/albums/:id' element={<AlbumDetails/>}/>
+                    <Route  path='/artist/:id' element={<ArtistDetails/>}/>
+                    <Route  path='/album/:id' element={<AlbumDetails/>}/>
                     <Route  path='/signup' element={!isNotLogged ? <Navigate to='/'/> : <Signup/>} />
                     <Route  path='/add' element={isNotLogged ? <Navigate to='/signin'/> : <Add/>} />
                 </Routes>
             </Layout>
-        </Router>
+        </BrowserRouter>
     );
 }
 

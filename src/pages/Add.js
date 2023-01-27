@@ -18,15 +18,15 @@ const App = () => {
     };
     const checkTextInput = () => {
         if (!formValue.title.trim()) {
-            alert('Please Enter title');
+            alert('Please Enter source');
             return;
         }
         if (!formValue.image.trim()) {
-            alert('Please Enter image');
+            alert('Please Enter name');
 
         }
         if (!formValue.content.trim()) {
-            alert('Please Enter content');
+            alert('Please Enter writer');
 
         }
     };
@@ -37,17 +37,18 @@ const App = () => {
         event.preventDefault();
         axios({
             method: 'post',
-            url: 'https://pr-movies.herokuapp.com/api/movies',
+            url: 'http://localhost:3000/newSong',
             data: {
-                title: formValue.title,
-                image: formValue.image,
-                content: formValue.content
+                src: formValue.title,
+                name: formValue.image,
+                writer: formValue.content,
             }
         }).then(() => {
                 HandleChangeRoute();
             }).catch((error) => {
             alert("Podane dane są błędne!")
             console.log(error);
+            console.log(formValue.title);
         });
     }
 
@@ -62,29 +63,29 @@ const App = () => {
     return (
         <div className="form">
         <form onSubmit={handleSubmit}>
-            <h1>Title</h1>
+            <h1>Source</h1>
             <input
                 type="text"
                 name="title"
-                placeholder="title"
-                value={formValue.test}
+                placeholder="source"
+                value={formValue.title}
                 onChange={handleChange}
             />
             <br/><br/>
-            <h1>Image</h1>
+            <h1>Name</h1>
             <input
                 type="text"
                 name="image"
-                placeholder="image"
+                placeholder="name"
                 value={formValue.image}
                 onChange={handleChange}
             />
             <br/><br/>
-            <h1>Content</h1>
+            <h1>Writer</h1>
             <input
                 type="text"
                 name="content"
-                placeholder="content"
+                placeholder="writer"
                 value={formValue.content}
                 onChange={handleChange}
             />

@@ -1,76 +1,76 @@
-import React, { useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import React, {useEffect, useContext, useState} from "react";
+import {useParams} from "react-router-dom";
 
-import { ArtistContext } from "../context/ArtistContext";
-import image2 from "../images/image2.jpg"
+
 import "../styles/Details.css";
 import Album from "../components/Album";
+import {AlbumContext} from "../context/AlbumContext";
+import { Link } from "react-router-dom";
 
 const Detail = () => {
-    let { id } = useParams();
-    const { showDetail, selectedMovie } = useContext(ArtistContext);
+    let {id} = useParams();
+    const {showDetail, selectedAlbum} = useContext(AlbumContext);
+    const {showArtist, selectedArtist} = useContext(AlbumContext);
+
+    const content = selectedAlbum.tracklist?.map((post) => {
+        <ul>{post} </ul>
+    })
+
+    console.log(selectedAlbum.tracklist?.length);
     useEffect(() => {
         showDetail(id);
-    });
-
-    return (
-        /*   <div className="detail-container">
-               <div className="poster">
-                       <img src={selectedMovie.image} alt={selectedMovie.title} />
-               </div>
-               <div className="info">
-                   <div className="field">
-                       <div className="label">
-                           <p className="title label-p">{selectedMovie.title}</p>
-                       </div>
-                   </div>
-                   <div className="field">
-                       <div className="label">
-                           <p className="label-p">{selectedMovie.content}</p>
-                       </div>
-                   </div>
-               </div>
-           </div>*/
-        <div className="detail-container">
-            <div className="details">
-                <Album
-                    image = {image2}
-                    title = {"Test1"}
-                />
-            <div className="info">
-                <div className="field">
-                    <div className="label">
-                        <p className="title label-p">Lorem ipsum dolor sit.</p>
+        showArtist(selectedAlbum.artistId);
+    }, [selectedAlbum.artistId]);
+    if (id !== undefined) {
+        return(
+            <div className="detail-container">
+                <div className="details">
+                    <Album
+                        image={selectedAlbum.image}
+                        title={selectedAlbum.title}
+                    />
+                    <div className="info">
+                        <div className="field">
+                            <div className="label">
+                                <p className="title label-p">{selectedAlbum.title}</p>
+                                <Link
+                                    to={`../artist/${selectedArtist.id}`}
+                                    className="text-link"
+                                    key={selectedArtist.id}
+                                >
+                                 <p className="label-p">{selectedArtist.name} </p>
+                                </Link>
+                            </div>
+                        </div>
+                        <div className="field">
+                            <div className="label">
+                                <p className="label-p">
+                                    Ocena albumu: {selectedAlbum.rating}
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div className="field">
-                    <div className="label">
-                        <p className="label-p">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquam architecto consectetur, dicta dolor dolore dolorem exercitationem facere harum laboriosam mollitia nisi non obcaecati officia quas ratione temporibus ullam veniam</p>
+                <div className="trackdetails">
+                    <h3>Utwory</h3>
+                    <div className="tracklist">
+                        {selectedAlbum.tracklist?.map((item, index) => (
+                           <ul>{index+1} {item}</ul>
+                        ))}
+
+
+
+
                     </div>
                 </div>
-            </div>
-            </div>
-            <div className="trackdetails">
-                <h3>Utwory</h3>
-                <div className="tracklist">
-                <li>01</li>
-                    <li>Lorem</li>
-                    <li>1:52</li>
-                    <li>02</li>
-                    <li>Lorem</li>
-                    <li>2:05</li>
-                    <li>03</li>
-                    <li>Lorem</li>
-                    <li>2:35</li>
-                    <li>04</li>
-                    <li>Lorem</li>
-                    <li>3:12</li>
-                </div>
-            </div>
-        </div>
+            </div>)
+    }
 
 
-    );
+
+
+
+
 };
 
 export default Detail;

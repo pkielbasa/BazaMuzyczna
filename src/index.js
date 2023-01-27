@@ -3,13 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import MovieAppProvider from './context/ArtistContext';
-
+import AlbumAppProvider from './context/AlbumContext';
+import ArtistAppProvider from './context/ArtistContext';
+import SongAppProvider from "./context/SongContext";
 ReactDOM.render(
   <React.StrictMode>
-      <MovieAppProvider>
+      <ArtistAppProvider>
+          <AlbumAppProvider>
+              <SongAppProvider>
       <App />
-      </MovieAppProvider>
+          </SongAppProvider>
+      </AlbumAppProvider>
+  </ArtistAppProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

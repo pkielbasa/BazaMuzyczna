@@ -25,7 +25,7 @@ const Signin = () => {
         event.preventDefault();
         axios({
             method: 'post',
-            url: 'https://pr-movies.herokuapp.com/api/user/auth',
+            url: 'http://localhost:3000/api/user/auth',
             data: {
                 login: name,
                 password: password,
@@ -69,7 +69,7 @@ const Signin = () => {
                     />
 
                     <br/>
-                    <button id="createAccountButton" type="submit">Zaloguj!</button>
+                    <button id="createAccountButton" type="submit">Sign in</button>
                 </form>
             </div>
         </div>

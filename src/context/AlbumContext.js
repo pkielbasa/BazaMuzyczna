@@ -1,45 +1,61 @@
 import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
-export const ArtistContext = createContext();
+import {useParams} from "react-router-dom";
+export const AlbumContext = createContext();
 
 
-const MovieApp = ({ children }) => {
-    const [movies, setMovies] = useState();
-    const [selectedMovie, setSelectedMovie] = useState('');
+const AlbumApp = ({ children }) => {
 
-    const fetchMovies = async () => {
+    const [albums, setAlbums] = useState();
+    const [selectedAlbum, setSelectedAlbum] = useState('');
+    const [selectedArtist, setSelectedArtist] = useState('');
+
+    const fetchAlbums = async () => {
         const response = await axios.get(
-            `https://pr-movies.herokuapp.com/api/movies`
+            `http://localhost:3000/albums`
         );
         const data = response.data;
-        setMovies(data);
+        console.log(data);
+        setAlbums(data);
     };
 
 
     const showDetail = async (id) => {
         const response = await axios(
-            `https://pr-movies.herokuapp.com/api/movies/${id}`
+            `http://localhost:3000/album/${id}`
         );
         const data = response.data;
-        setSelectedMovie(data);
+        setSelectedAlbum(data);
+
+    };
+
+    const showArtist = async (id) => {
+        const response = await axios.get(
+            `http://localhost:3000/artist/${id}`
+        );
+        const data = response.data;
+        console.log(data);
+        setSelectedArtist(data);
 
     };
 
     useEffect(() => {
-        fetchMovies();
+        fetchAlbums();
     }, []);
 
     return (
-        <ArtistContext.Provider
+        <AlbumContext.Provider
             value={{
-                movies,
+                albums,
                 showDetail,
-                selectedMovie,
+                showArtist,
+                selectedArtist,
+                selectedAlbum,
             }}
         >
             {children}
-        </ArtistContext.Provider>
+        </AlbumContext.Provider>
     );
 };
 
-export default MovieApp;
+export default AlbumApp;

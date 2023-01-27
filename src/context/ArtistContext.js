@@ -3,38 +3,50 @@ import axios from 'axios';
 export const ArtistContext = createContext();
 
 
-const MovieApp = ({ children }) => {
-    const [movies, setMovies] = useState();
-    const [selectedMovie, setSelectedMovie] = useState('');
+const ArtistApp = ({ children }) => {
+    const [artists, setArtists] = useState();
+    const [selectedArtist, setSelectedArtist] = useState('');
+    const [selectedAlbum, setSelectedAlbum] = useState('');
 
-    const fetchMovies = async () => {
+    const fetchArtist = async () => {
         const response = await axios.get(
-            `https://pr-movies.herokuapp.com/api/movies`
+            `http://localhost:3000/artists`
         );
         const data = response.data;
-        setMovies(data);
+        setArtists(data);
     };
 
-
     const showDetail = async (id) => {
-        const response = await axios(
-            `https://pr-movies.herokuapp.com/api/movies/${id}`
+        const response = await axios.get(
+            `http://localhost:3000/artist/${id}`
         );
         const data = response.data;
-        setSelectedMovie(data);
+        setSelectedArtist(data);
+
+    };
+
+    const showAlbums = async (id) => {
+        const response = await axios.get(
+            `http://localhost:3000/album/${id}`
+        );
+        const data = response.data;
+        console.log(data);
+        setSelectedAlbum(data);
 
     };
 
     useEffect(() => {
-        fetchMovies();
+        fetchArtist();
     }, []);
 
     return (
         <ArtistContext.Provider
             value={{
-                movies,
+                artists,
                 showDetail,
-                selectedMovie,
+                showAlbums,
+                selectedAlbum,
+                selectedArtist,
             }}
         >
             {children}
@@ -42,4 +54,4 @@ const MovieApp = ({ children }) => {
     );
 };
 
-export default MovieApp;
+export default ArtistApp;
